@@ -2,7 +2,7 @@ Following RESTFul Endpoints created :
 
 1.  To Get the on failed transactions
     The RESTFul API
-     POST : http://<url>:<Port>/record/reports
+     POST : http://url:Port/record/reports
 
     Request:
     {
