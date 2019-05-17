@@ -33,7 +33,6 @@ public class RecordProcessorServiceTest {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        //xmlreader.read();
     }
 
     @Test
