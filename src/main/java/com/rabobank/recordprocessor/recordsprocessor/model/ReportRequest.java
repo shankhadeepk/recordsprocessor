@@ -1,10 +1,14 @@
 package com.rabobank.recordprocessor.recordsprocessor.model;
-
+/*
+*
+* The JSON Request for the POST REST API
+*
+*
+* */
 public class ReportRequest {
 
     private String csvFileLocation;
     private String xmlFileLocation;
-    private String outputReportLocation;
 
     public String getCsvFileLocation() {
         return csvFileLocation;
@@ -20,13 +24,5 @@ public class ReportRequest {
 
     public void setXmlFileLocation(String xmlFileLocation) {
         this.xmlFileLocation = xmlFileLocation;
-    }
-
-    public String getOutputReportLocation() {
-        return outputReportLocation;
-    }
-
-    public void setOutputReportLocation(String outputReportLocation) {
-        this.outputReportLocation = outputReportLocation;
     }
 }

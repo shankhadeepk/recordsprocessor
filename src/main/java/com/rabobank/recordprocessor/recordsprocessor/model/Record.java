@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /*
- * Records read from CSV and XML file mapped to this object
+ * CSV or XML record data mapped to Record Object
  *
  * */
 @XmlAccessorType(XmlAccessType.FIELD)

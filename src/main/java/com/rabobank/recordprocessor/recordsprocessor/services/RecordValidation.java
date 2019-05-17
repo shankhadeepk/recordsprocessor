@@ -9,20 +9,28 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map;
 
+/*
+ * This class implements Validation of Records
+ * @Author Shankhadeep Karmakar
+ * @Version 1.0
+ *
+ *
+ * */
+
 @Service
 public class RecordValidation {
 
     @Autowired
     public Map<String,String> referenceNumber;
 
-    public boolean validateReferenceNumber(Record record){
+    public synchronized boolean validateReferenceNumber(Record record){
         if(referenceNumber.get(record.getReference())!=null){
             return false;
         }
         referenceNumber.put(record.getReference(),record.getDescription());
         return true;
     }
-    public boolean validateEndBalance(Record record){
+    public synchronized boolean validateEndBalance(Record record){
         BigDecimal sum= record.getStartBalance().add(record.getMutation());
         sum=sum.setScale(2, RoundingMode.FLOOR);
         if(sum.compareTo(record.getEndBalance())!=0){
@@ -30,7 +38,7 @@ public class RecordValidation {
         }
         return true;
     }
-    public boolean validateFileName(String fileLocation){
+    public synchronized boolean validateFileName(String fileLocation){
 
         File file=new File(fileLocation);
         if(file.exists() && !file.isDirectory()){
@@ -38,7 +46,7 @@ public class RecordValidation {
         }
         return false;
     }
-    public boolean validateRecord(Record record){
+    public synchronized boolean validateRecord(Record record){
         return (validateReferenceNumber(record) && validateEndBalance(record));
     }
 }
