@@ -23,7 +23,7 @@ public class RecordProcessorServiceTest {
     @Test
     public void checkCSVReader(){
         try {
-            csvreader.read("/home/hans/shankha/interview-project/assignment-shankadeep/records.csv");
+            csvreader.read("src/test/resources/records.csv");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JAXBException e) {
@@ -38,7 +38,7 @@ public class RecordProcessorServiceTest {
     @Test
     public void checkXMLReader(){
         try {
-            xmlreader.read("/home/hans/shankha/interview-project/assignment-shankadeep/records.xml");
+            xmlreader.read("src/test/resources/records.xml");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JAXBException e) {
