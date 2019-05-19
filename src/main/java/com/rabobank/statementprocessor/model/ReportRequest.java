@@ -1,4 +1,4 @@
-package com.rabobank.recordsprocessor.model;
+package com.rabobank.statementprocessor.model;
 /*
 *
 * The JSON Request for the POST REST API

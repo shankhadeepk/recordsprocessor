@@ -1,4 +1,4 @@
-package com.rabobank.recordsprocessor.exception;
+package com.rabobank.statementprocessor.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

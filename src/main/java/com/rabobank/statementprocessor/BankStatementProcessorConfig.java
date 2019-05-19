@@ -1,6 +1,6 @@
-package com.rabobank.recordsprocessor;
+package com.rabobank.statementprocessor;
 
-import com.rabobank.recordsprocessor.model.Record;
+import com.rabobank.statementprocessor.model.Record;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Configuration
-public class RecordsProcessorConfig {
+public class BankStatementProcessorConfig {
 
     /**
      * Holds the reference Number of the all Records

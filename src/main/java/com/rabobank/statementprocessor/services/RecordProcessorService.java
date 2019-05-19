@@ -1,4 +1,4 @@
-package com.rabobank.recordsprocessor.services;
+package com.rabobank.statementprocessor.services;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;

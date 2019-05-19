@@ -1,4 +1,4 @@
-package com.rabobank.recordsprocessor.model;
+package com.rabobank.statementprocessor.model;
 
 import org.springframework.http.HttpStatus;
 

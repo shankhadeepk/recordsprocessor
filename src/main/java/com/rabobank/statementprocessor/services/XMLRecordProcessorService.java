@@ -1,7 +1,7 @@
-package com.rabobank.recordsprocessor.services;
+package com.rabobank.statementprocessor.services;
 
-import com.rabobank.recordsprocessor.model.Record;
-import com.rabobank.recordsprocessor.util.ApplicationConstants;
+import com.rabobank.statementprocessor.model.Record;
+import com.rabobank.statementprocessor.util.ApplicationConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +72,8 @@ public class XMLRecordProcessorService implements RecordProcessorService {
                 if (jaxbElement == null) break;
 
                 record = (Record) jaxbElement.getValue();
+
+                LOG.info("Record read from XML file :"+record);
                 if(!recordValidation.validateRecord(record))
                     listOfRecords.add(record);
                 jaxbElement = null;

@@ -1,6 +1,7 @@
-package com.rabobank.recordsprocessor.services;
+package com.rabobank.statementprocessor.services;
 
-import com.rabobank.recordsprocessor.model.Record;
+import com.rabobank.statementprocessor.model.Record;
+import com.rabobank.statementprocessor.services.RecordValidation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

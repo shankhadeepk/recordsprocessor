@@ -1,6 +1,6 @@
-package com.rabobank.recordsprocessor.services;
+package com.rabobank.statementprocessor.services;
 
-import com.rabobank.recordsprocessor.model.Record;
+import com.rabobank.statementprocessor.model.Record;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
@@ -57,6 +57,8 @@ public class CSVRecordProcessorService implements RecordProcessorService {
                     record.setStartBalance(new BigDecimal(csvRecord1.get().get(3)));
                     record.setMutation(new BigDecimal(csvRecord1.get().get(4)));
                     record.setEndBalance(new BigDecimal(csvRecord1.get().get(5)));
+
+                    LOG.info("Record read from CSV file :"+record);
                     if (!recordValidation.validateRecord(record))
                         listOfRecords.add(record);
                 }

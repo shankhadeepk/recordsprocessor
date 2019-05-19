@@ -1,4 +1,4 @@
-package com.rabobank.recordsprocessor;
+package com.rabobank.statementprocessor;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RecordsProcessorApplicationTests {
+public class BankStatementProcessorAppTests {
 
 	@Test
 	public void contextLoads() {

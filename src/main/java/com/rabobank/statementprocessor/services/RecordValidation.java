@@ -1,6 +1,8 @@
-package com.rabobank.recordsprocessor.services;
+package com.rabobank.statementprocessor.services;
 
-import com.rabobank.recordsprocessor.model.Record;
+import com.rabobank.statementprocessor.model.Record;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +23,13 @@ import java.util.Optional;
 @Service
 public class RecordValidation {
 
+    private final Logger LOG = LoggerFactory.getLogger(RecordValidation.class);
+
     @Autowired
     public Map<String,String> referenceNumber;
 
     private synchronized boolean validateReferenceNumber(Record record){
+        LOG.info("Validating reference number: "+record.getReference());
         if(referenceNumber.get(record.getReference())!=null){
             return false;
         }
@@ -34,18 +39,20 @@ public class RecordValidation {
     private synchronized boolean validateEndBalance(Record record){
         Optional<BigDecimal> startBalance=Optional.ofNullable(record.getStartBalance());
         Optional<BigDecimal> mutationBalance=Optional.ofNullable(record.getMutation());
+        Optional<BigDecimal> endbalance=Optional.ofNullable(record.getEndBalance());
 
         if (startBalance.isPresent() && mutationBalance.isPresent()) {
+            LOG.info("Validating Balance: startbalance ["+startBalance.get()+"], Mutation ["+mutationBalance.get()+"], Endbalance ["+endbalance.get()+"]");
             BigDecimal sum = startBalance.get().add(mutationBalance.get());
             sum = sum.setScale(2, RoundingMode.FLOOR);
-            if (sum.compareTo(record.getEndBalance()) != 0) {
+            if (sum.compareTo(endbalance.get()) != 0) {
                 return false;
             }
             return true;
         }else return false;
     }
     public synchronized boolean validateFileName(String fileLocation){
-
+        LOG.info("Validating file location: "+fileLocation);
         File file=new File(fileLocation);
         if(file.exists() && !file.isDirectory()){
             return true;

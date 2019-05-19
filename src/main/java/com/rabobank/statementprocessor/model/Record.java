@@ -1,4 +1,4 @@
-package com.rabobank.recordsprocessor.model;
+package com.rabobank.statementprocessor.model;
 
 import javax.xml.bind.annotation.*;
 import java.math.BigDecimal;

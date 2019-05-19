@@ -1,12 +1,12 @@
-package com.rabobank.recordsprocessor.controller;
+package com.rabobank.statementprocessor.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.rabobank.recordsprocessor.exception.InvalidFilePathException;
-import com.rabobank.recordsprocessor.model.Record;
-import com.rabobank.recordsprocessor.model.ReportRequest;
-import com.rabobank.recordsprocessor.services.RecordProcessorService;
-import com.rabobank.recordsprocessor.services.RecordValidation;
+import com.rabobank.statementprocessor.exception.InvalidFilePathException;
+import com.rabobank.statementprocessor.model.Record;
+import com.rabobank.statementprocessor.model.ReportRequest;
+import com.rabobank.statementprocessor.services.RecordProcessorService;
+import com.rabobank.statementprocessor.services.RecordValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -44,25 +44,26 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/record")
-public class RecordsController {
+public class BankStatementController {
+
 
     @Resource
-    public RecordProcessorService csvreader;
+    private RecordProcessorService csvreader;
 
     @Resource
-    public RecordProcessorService xmlreader;
+    private RecordProcessorService xmlreader;
 
     @Autowired
-    public RecordValidation recordValidation;
+    private RecordValidation recordValidation;
 
     @Resource
-    public Map<String,String> referenceNumber;
+    private Map<String,String> referenceNumber;
 
     @Resource
-    public List<Record> listOfRecords;
+    private List<Record> listOfRecords;
 
     @PostMapping(value="/reports",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> checkStatements(@RequestBody ReportRequest request) throws ClassNotFoundException, JAXBException, XMLStreamException, IOException,InvalidFilePathException{
+    public ResponseEntity<String> checkStatements(@RequestBody ReportRequest request) throws ClassNotFoundException, JAXBException, XMLStreamException, IOException, InvalidFilePathException {
 
         Gson gsonBuilder = new GsonBuilder().create();
         referenceNumber.clear();

@@ -1,8 +1,8 @@
-package com.rabobank.recordsprocessor.exception;
+package com.rabobank.statementprocessor.exception;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.rabobank.recordsprocessor.model.AppError;
+import com.rabobank.statementprocessor.model.AppError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
