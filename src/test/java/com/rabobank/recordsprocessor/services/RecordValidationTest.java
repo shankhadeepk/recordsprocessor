@@ -1,6 +1,6 @@
-package com.rabobank.recordprocessor.recordsprocessor.services;
+package com.rabobank.recordsprocessor.services;
 
-import com.rabobank.recordprocessor.recordsprocessor.model.Record;
+import com.rabobank.recordsprocessor.model.Record;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,29 +24,6 @@ public class RecordValidationTest {
     @Resource
     public Map<String,String> referenceNumber;
 
-    @Test
-    public void validateReferenceNumber() {
-        Record record=new Record();
-        record.setReference("122240");
-        record.setAccountNumber("NL43AEGO0773393871");
-        record.setDescription("Subscription for Erik King");
-        record.setStartBalance(new BigDecimal(78.95));
-        record.setMutation(new BigDecimal(-25.38));
-        record.setEndBalance(new BigDecimal(53.57));
-        assertTrue(recordValidation.validateReferenceNumber(record));
-    }
-
-    @Test
-    public void validateEndBalance() {
-        Record record=new Record();
-        record.setReference("122240");
-        record.setAccountNumber("NL43AEGO0773393871");
-        record.setDescription("Subscription for Erik King");
-        record.setStartBalance(new BigDecimal(78.95));
-        record.setMutation(new BigDecimal(-25.38));
-        record.setEndBalance(new BigDecimal(53.57));
-        assertTrue(recordValidation.validateEndBalance(record));
-    }
 
     @Test
     public void validateRecord() {

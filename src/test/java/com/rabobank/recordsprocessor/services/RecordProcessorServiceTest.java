@@ -1,4 +1,4 @@
-package com.rabobank.recordprocessor.recordsprocessor.services;
+package com.rabobank.recordsprocessor.services;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

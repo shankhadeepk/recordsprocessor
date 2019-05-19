@@ -1,11 +1,10 @@
-package com.rabobank.recordprocessor.recordsprocessor.services;
+package com.rabobank.recordsprocessor.services;
 
-import com.rabobank.recordprocessor.recordsprocessor.model.Record;
-import com.rabobank.recordprocessor.recordsprocessor.util.ApplicationConstants;
+import com.rabobank.recordsprocessor.model.Record;
+import com.rabobank.recordsprocessor.util.ApplicationConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;

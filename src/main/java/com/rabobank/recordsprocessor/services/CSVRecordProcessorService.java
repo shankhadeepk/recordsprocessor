@@ -1,6 +1,6 @@
-package com.rabobank.recordprocessor.recordsprocessor.services;
+package com.rabobank.recordsprocessor.services;
 
-import com.rabobank.recordprocessor.recordsprocessor.model.Record;
+import com.rabobank.recordsprocessor.model.Record;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.io.Reader;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
+
 /*
 * This class implements CSV Record Processor Service
 * @Author Shankhadeep Karmakar
@@ -41,19 +43,23 @@ public class CSVRecordProcessorService implements RecordProcessorService {
         Record record=null;
         Reader in=new FileReader(inputFile);
         Iterable<CSVRecord> csvRecords= CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(in);
+        Optional<CSVRecord> csvRecord1=null;
 
         try{
             LOG.info("CSV Record to be read");
             for (CSVRecord csvRecord:csvRecords) {
-                record = new Record();
-                record.setReference(csvRecord.get(0));
-                record.setAccountNumber(csvRecord.get(1));
-                record.setDescription(csvRecord.get(2));
-                record.setStartBalance(new BigDecimal(csvRecord.get(3)));
-                record.setMutation(new BigDecimal(csvRecord.get(4)));
-                record.setEndBalance(new BigDecimal(csvRecord.get(5)));
-                if(!recordValidation.validateRecord(record))
-                    listOfRecords.add(record);
+                csvRecord1=Optional.ofNullable(csvRecord);
+                if(csvRecord1.isPresent()) {
+                    record = new Record();
+                    record.setReference(csvRecord1.get().get(0));
+                    record.setAccountNumber(csvRecord1.get().get(1));
+                    record.setDescription(csvRecord1.get().get(2));
+                    record.setStartBalance(new BigDecimal(csvRecord1.get().get(3)));
+                    record.setMutation(new BigDecimal(csvRecord1.get().get(4)));
+                    record.setEndBalance(new BigDecimal(csvRecord1.get().get(5)));
+                    if (!recordValidation.validateRecord(record))
+                        listOfRecords.add(record);
+                }
             }
             record=null;
         }

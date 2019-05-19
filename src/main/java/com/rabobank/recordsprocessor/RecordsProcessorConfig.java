@@ -1,6 +1,6 @@
-package com.rabobank.recordprocessor.recordsprocessor;
+package com.rabobank.recordsprocessor;
 
-import com.rabobank.recordprocessor.recordsprocessor.model.Record;
+import com.rabobank.recordsprocessor.model.Record;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;

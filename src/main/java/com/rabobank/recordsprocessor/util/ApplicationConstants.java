@@ -1,8 +1,8 @@
-package com.rabobank.recordprocessor.recordsprocessor.util;
+package com.rabobank.recordsprocessor.util;
 
 public enum ApplicationConstants {
 
-    CLASS("com.rabobank.recordprocessor.recordsprocessor.model.Record"),
+    CLASS("com.rabobank.recordsprocessor.model.Record"),
     ELEMENT_NAME("record");
 
     private String value;
