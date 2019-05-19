@@ -22,33 +22,52 @@ public class RecordProcessorServiceTest {
     public RecordProcessorService xmlreader;
 
     @Test
-    public void checkCSVReader(){
-        try {
-            csvreader.read("src/test/resources/records.csv");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        } catch (XMLStreamException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+    public void checkCSVReader() throws ClassNotFoundException, JAXBException, XMLStreamException, IOException {
+        csvreader.read("src/test/resources/records.csv");
+    }
+
+    @Test(expected = NumberFormatException.class)
+    public void checkCSVReaderIfRecordHasNoStartBalance() throws ClassNotFoundException, JAXBException, XMLStreamException, IOException {
+        csvreader.read("src/test/resources/recordsNoStartBalance.csv");
+    }
+
+    @Test(expected = NumberFormatException.class)
+    public void checkCSVReaderIfRecordHasNoEndBalance() throws ClassNotFoundException, JAXBException, XMLStreamException, IOException {
+        csvreader.read("src/test/resources/recordsNoEndBalance.csv");
+    }
+
+    @Test(expected = NumberFormatException.class)
+    public void checkCSVReaderIfRecordHasNoMutation() throws ClassNotFoundException, JAXBException, XMLStreamException, IOException {
+        csvreader.read("src/test/resources/recordsNoMutation.csv");
+    }
+
+    @Test(expected = NumberFormatException.class)
+    public void checkCSVReaderIfRecordHasWrongStartBalance() throws ClassNotFoundException, JAXBException, XMLStreamException, IOException {
+        csvreader.read("src/test/resources/recordsWrongStartBalance.csv");
     }
 
     @Test
-    public void checkXMLReader(){
-        try {
-            xmlreader.read("src/test/resources/records.xml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        } catch (XMLStreamException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        //xmlreader.read();
+    public void checkXMLReader() throws ClassNotFoundException, JAXBException, XMLStreamException, IOException {
+         xmlreader.read("src/test/resources/records.xml");
+    }
+
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void checkXMLReaderIfRecordHasNoStartBalance() throws ClassNotFoundException, JAXBException, XMLStreamException, IOException {
+        csvreader.read("src/test/resources/recordsNoStartBalance.xml");
+    }
+
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void checkXMLReaderIfRecordHasNoEndBalance() throws ClassNotFoundException, JAXBException, XMLStreamException, IOException {
+        csvreader.read("src/test/resources/recordsNoEndBalance.xml");
+    }
+
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void checkXMLReaderIfRecordHasNoMutation() throws ClassNotFoundException, JAXBException, XMLStreamException, IOException {
+        csvreader.read("src/test/resources/recordsNoMutation.xml");
+    }
+
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void checkXMLReaderIfRecordHasWrongStartBalance() throws ClassNotFoundException, JAXBException, XMLStreamException, IOException {
+        csvreader.read("src/test/resources/recordsWrongStartBalance.xml");
     }
 }

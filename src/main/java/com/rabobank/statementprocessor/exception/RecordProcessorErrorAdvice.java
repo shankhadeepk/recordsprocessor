@@ -59,4 +59,11 @@ public class RecordProcessorErrorAdvice {
         Gson gsonBuilder = new GsonBuilder().create();
         return new ResponseEntity<>(gsonBuilder.toJson(error), HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler({ NumberFormatException.class})
+    public ResponseEntity<String> handleNumberFormatException(Exception ex){
+        LOG.error("File not found ",ex);
+        AppError error=new AppError(HttpStatus.NOT_FOUND,"Failed! Please check the startBalance, Mutation and Endbalance of the records");
+        Gson gsonBuilder = new GsonBuilder().create();
+        return new ResponseEntity<>(gsonBuilder.toJson(error), HttpStatus.NOT_FOUND);
+    }
 }

@@ -24,99 +24,49 @@ public class BankStatementControllerTest {
     private BankStatementController bankStatementController;
 
     @Test
-    public void checkStatements() {
+    public void checkStatements() throws ClassNotFoundException, IOException, XMLStreamException, JAXBException {
         ReportRequest reportRequest=new ReportRequest();
         reportRequest.setCsvFileLocation("src/test/resources/records.csv");
         reportRequest.setXmlFileLocation("src/test/resources/records.xml");
         ResponseEntity<String> response=null;
-        try {
-            response=bankStatementController.checkStatements(reportRequest);
-            assertNotNull(response);
-            assertEquals(response.getStatusCode(),HttpStatus.CREATED);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        } catch (XMLStreamException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        response=bankStatementController.checkStatements(reportRequest);
+        assertNotNull(response);
+        assertEquals(response.getStatusCode(),HttpStatus.CREATED);
     }
 
     @Test
-    public void checkStatementsIfCSVNotAvailable() {
+    public void checkStatementsIfCSVNotAvailable() throws ClassNotFoundException, IOException, XMLStreamException, JAXBException {
         ReportRequest reportRequest=new ReportRequest();
         reportRequest.setXmlFileLocation("src/test/resources/records.xml");
         ResponseEntity<String> response=null;
-        try {
-            response=bankStatementController.checkStatements(reportRequest);
-            assertNotNull(response);
-            assertEquals(response.getStatusCode(),HttpStatus.CREATED);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        } catch (XMLStreamException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        response=bankStatementController.checkStatements(reportRequest);
+        assertNotNull(response);
+        assertEquals(response.getStatusCode(),HttpStatus.CREATED);
     }
     @Test
-    public void checkStatementsIfXMLNotAvailable() {
+    public void checkStatementsIfXMLNotAvailable() throws ClassNotFoundException, IOException, XMLStreamException, JAXBException {
         ReportRequest reportRequest=new ReportRequest();
         reportRequest.setXmlFileLocation("src/test/resources/records.xml");
         ResponseEntity<String> response=null;
-        try {
-            response=bankStatementController.checkStatements(reportRequest);
-            assertNotNull(response);
-            assertEquals(response.getStatusCode(),HttpStatus.CREATED);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        } catch (XMLStreamException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        response=bankStatementController.checkStatements(reportRequest);
+        assertNotNull(response);
+        assertEquals(response.getStatusCode(),HttpStatus.CREATED);
     }
     @Test
-    public void checkStatementsIfNoneAvailable() {
+    public void checkStatementsIfNoneAvailable() throws ClassNotFoundException, IOException, XMLStreamException, JAXBException {
         ReportRequest reportRequest=new ReportRequest();
         ResponseEntity<String> response=null;
-        try {
-            response=bankStatementController.checkStatements(reportRequest);
-            assertNotNull(response);
-            assertEquals(response.getStatusCode(),HttpStatus.CREATED);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        } catch (XMLStreamException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        response=bankStatementController.checkStatements(reportRequest);
+        assertNotNull(response);
+        assertEquals(response.getStatusCode(),HttpStatus.CREATED);
     }
 
     @Test(expected = InvalidFilePathException.class)
-    public void checkStatementsIfCSVNotProper() {
+    public void checkStatementsIfCSVNotProper() throws ClassNotFoundException, IOException, XMLStreamException, JAXBException {
         ReportRequest reportRequest=new ReportRequest();
         reportRequest.setCsvFileLocation("src/test/resources/records");
         ResponseEntity<String> response=null;
-        try {
-            response=bankStatementController.checkStatements(reportRequest);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        } catch (XMLStreamException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        response=bankStatementController.checkStatements(reportRequest);
     }
 
     @Test(expected = InvalidFilePathException.class)
@@ -124,7 +74,6 @@ public class BankStatementControllerTest {
         ReportRequest reportRequest=new ReportRequest();
         reportRequest.setXmlFileLocation("src/test/resources/records");
         ResponseEntity<String> response=null;
-
         response=bankStatementController.checkStatements(reportRequest);
 
     }
@@ -134,7 +83,6 @@ public class BankStatementControllerTest {
         ReportRequest reportRequest=new ReportRequest();
         reportRequest.setXmlFileLocation("src/test/resources/recordsWrongFormat.xml");
         ResponseEntity<String> response=null;
-
         response=bankStatementController.checkStatements(reportRequest);
     }
 
@@ -143,7 +91,6 @@ public class BankStatementControllerTest {
         ReportRequest reportRequest=new ReportRequest();
         reportRequest.setCsvFileLocation("src/test/resources/recordsWrongFormat.csv");
         ResponseEntity<String> response=null;
-
         response=bankStatementController.checkStatements(reportRequest);
     }
 }
