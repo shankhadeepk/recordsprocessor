@@ -16,6 +16,6 @@ How to run the project
    mvn clean install
 
 2. Run the Project
-   java -jar  ./target/recordsprocessor-1.0.0.jar
+   java -jar ./target/rabostatementprocessor-1.0.0.jar
 
 By default it will run at Port 8080
