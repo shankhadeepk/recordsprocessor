@@ -54,15 +54,15 @@ public class RecordProcessorErrorAdvice {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({ IOException.class})
     public ResponseEntity<String> handleIOException(Exception ex){
-        LOG.error("File not found ",ex);
+        LOG.error("File not found",ex);
         AppError error=new AppError(HttpStatus.NOT_FOUND,"Failed! Please check if file exists or not");
         Gson gsonBuilder = new GsonBuilder().create();
         return new ResponseEntity<>(gsonBuilder.toJson(error), HttpStatus.NOT_FOUND);
     }
     @ExceptionHandler({ NumberFormatException.class})
     public ResponseEntity<String> handleNumberFormatException(Exception ex){
-        LOG.error("File not found ",ex);
-        AppError error=new AppError(HttpStatus.NOT_FOUND,"Failed! Please check the startBalance, Mutation and Endbalance of the records");
+        LOG.error("Format of the StartBalance or EndBalance or Mutation is not correct:",ex);
+        AppError error=new AppError(HttpStatus.NOT_FOUND,"Failed! Please check the startBalance, Mutation and Endbalance of the records in CSV/XML file");
         Gson gsonBuilder = new GsonBuilder().create();
         return new ResponseEntity<>(gsonBuilder.toJson(error), HttpStatus.NOT_FOUND);
     }

@@ -41,7 +41,7 @@ public class RecordValidation {
         Optional<BigDecimal> mutationBalance=Optional.ofNullable(record.getMutation());
         Optional<BigDecimal> endbalance=Optional.ofNullable(record.getEndBalance());
 
-        if (startBalance.isPresent() && mutationBalance.isPresent()) {
+        if (startBalance.isPresent() && mutationBalance.isPresent() && endbalance.isPresent()) {
             LOG.info("Validating Balance: startbalance ["+startBalance.get()+"], Mutation ["+mutationBalance.get()+"], Endbalance ["+endbalance.get()+"]");
             BigDecimal sum = startBalance.get().add(mutationBalance.get());
             sum = sum.setScale(2, RoundingMode.FLOOR);
@@ -49,7 +49,9 @@ public class RecordValidation {
                 return false;
             }
             return true;
-        }else return false;
+        }else {
+            throw new NumberFormatException("Failed! Please check the startBalance, Mutation and Endbalance of the records in XML");
+        }
     }
     public synchronized boolean validateFileName(String fileLocation){
         LOG.info("Validating file location: "+fileLocation);
