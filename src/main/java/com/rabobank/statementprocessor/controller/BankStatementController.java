@@ -41,7 +41,6 @@ import java.util.Map;
  * xmlFileLocation (optional)
  *
  * */
-
 @RestController
 @RequestMapping("/record")
 public class BankStatementController {
@@ -62,6 +61,19 @@ public class BankStatementController {
     @Resource
     private List<Record> listOfRecords;
 
+
+    /**
+     * REST Endpoint acceptig request having the location of the csv file and xml file OR either of two
+     *
+     *
+     * @param request the request
+     * @return the response entity
+     * @throws ClassNotFoundException   the class not found exception
+     * @throws JAXBException            the jaxb exception
+     * @throws XMLStreamException       the xml stream exception
+     * @throws IOException              the io exception
+     * @throws InvalidFilePathException the invalid file path exception
+     */
     @PostMapping(value="/reports",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> checkStatements(@RequestBody ReportRequest request) throws ClassNotFoundException, JAXBException, XMLStreamException, IOException, InvalidFilePathException {
 

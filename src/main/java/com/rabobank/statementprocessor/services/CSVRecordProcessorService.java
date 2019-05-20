@@ -1,5 +1,6 @@
 package com.rabobank.statementprocessor.services;
 
+import com.rabobank.statementprocessor.exception.InvalidFilePathException;
 import com.rabobank.statementprocessor.model.Record;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
+import javax.xml.bind.JAXBException;
+import javax.xml.stream.XMLStreamException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -20,7 +23,7 @@ import java.util.List;
 import java.util.Optional;
 
 /*
-* This class implements CSV Record Processor Service
+* Service takes care of XML Record Processor
 * @Author Shankhadeep Karmakar
 * @Version 1.0
 *
@@ -32,12 +35,27 @@ public class CSVRecordProcessorService implements RecordProcessorService {
 
     private final Logger LOG = LoggerFactory.getLogger(CSVRecordProcessorService.class);
 
+    /**
+     * The List of records.
+     */
     @Resource
     public List<Record> listOfRecords;
 
+    /**
+     * The Record validation.
+     */
     @Autowired
     public RecordValidation recordValidation;
 
+
+    /**
+     * read reads each record from the CSV file and validates it with business scenarios
+     *
+     *
+     * @param inputFile accepts the input file from request
+     * @return the response entity
+     * @throws IOException              the io exception
+     */
     @Override
     public void read(String inputFile) throws IOException {
         Record record=null;

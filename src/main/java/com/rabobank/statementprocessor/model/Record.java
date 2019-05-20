@@ -5,9 +5,12 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /*
- * CSV or XML record data mapped to Record Object
- *
- * */
+* CSV or XML record data mapped to Record Object
+* @Author Shankhadeep Karmakar
+* @Version 1.0
+*
+*
+* */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
 public class Record {

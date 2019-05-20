@@ -2,6 +2,13 @@ package com.rabobank.statementprocessor.model;
 
 import org.springframework.http.HttpStatus;
 
+/*
+ * AppError return as response for any error, to the client.
+ * @Author Shankhadeep Karmakar
+ * @Version 1.0
+ *
+ *
+ * */
 public class AppError {
 
     private HttpStatus status;

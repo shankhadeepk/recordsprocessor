@@ -15,11 +15,22 @@ import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
 
+/**
+ * The type Record processor error advice.
+ */
 @ControllerAdvice
 public class RecordProcessorErrorAdvice {
 
     private final Logger LOG = LoggerFactory.getLogger(RecordProcessorErrorAdvice.class);
 
+
+    /**
+     * User defined exception handled, exception occurs in case file paths are not proper.
+     *
+     * @param ex     the ex
+     * @param status the status
+     * @return the response entity
+     */
     @ExceptionHandler({ InvalidFilePathException.class})
     public ResponseEntity<String> handleInvalidFilePathException(InvalidFilePathException ex, HttpStatus status){
         LOG.error("File path is not proper ",ex);
@@ -27,15 +38,28 @@ public class RecordProcessorErrorAdvice {
         Gson gsonBuilder = new GsonBuilder().create();
         return new ResponseEntity<>(gsonBuilder.toJson(error), status);
     }
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+
+
+    /**
+     * Exception handled when the xml data does not match the object
+     *
+     * @param ex the ex
+     * @return the response entity
+     */
     @ExceptionHandler({ ClassNotFoundException.class})
     public ResponseEntity<String> handleClassNotFound(Exception ex){
         LOG.error("Class path is not correct ",ex);
-        AppError error=new AppError(HttpStatus.NOT_FOUND,"Failed! Mapping object does not exists");
+        AppError error=new AppError(HttpStatus.NOT_FOUND,"Failed! Mapping object does not exists, please check the xml/csv data");
         Gson gsonBuilder = new GsonBuilder().create();
         return new ResponseEntity<>(gsonBuilder.toJson(error), HttpStatus.NOT_FOUND);
     }
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+
+    /**
+     * Exception handled when the format of the XML is not matching Object
+     *
+     * @param ex the ex
+     * @return the response entity
+     */
     @ExceptionHandler({ JAXBException.class})
     public ResponseEntity<String> handleJAXBException(Exception ex){
         LOG.error("Data to Object Mapping is not proper ",ex);
@@ -43,7 +67,13 @@ public class RecordProcessorErrorAdvice {
         Gson gsonBuilder = new GsonBuilder().create();
         return new ResponseEntity<>(gsonBuilder.toJson(error), HttpStatus.BAD_REQUEST);
     }
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+
+    /**
+     * Handle xml exception response entity when Format of XML is not proper.
+     *
+     * @param ex the ex
+     * @return the response entity
+     */
     @ExceptionHandler({ XMLStreamException.class})
     public ResponseEntity<String> handleXMLException(Exception ex){
         LOG.error("XML Format needs to be checked ",ex);
@@ -51,7 +81,13 @@ public class RecordProcessorErrorAdvice {
         Gson gsonBuilder = new GsonBuilder().create();
         return new ResponseEntity<>(gsonBuilder.toJson(error), HttpStatus.BAD_REQUEST);
     }
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+
+    /**
+     * Handle io exception response entity when file is not present.
+     *
+     * @param ex the ex
+     * @return the response entity
+     */
     @ExceptionHandler({ IOException.class})
     public ResponseEntity<String> handleIOException(Exception ex){
         LOG.error("File not found",ex);
@@ -59,6 +95,13 @@ public class RecordProcessorErrorAdvice {
         Gson gsonBuilder = new GsonBuilder().create();
         return new ResponseEntity<>(gsonBuilder.toJson(error), HttpStatus.NOT_FOUND);
     }
+
+    /**
+     * Handle number format exception response entity when decimal data is not proper in CSV or XML.
+     *
+     * @param ex the ex
+     * @return the response entity
+     */
     @ExceptionHandler({ NumberFormatException.class})
     public ResponseEntity<String> handleNumberFormatException(Exception ex){
         LOG.error("Format of the StartBalance or EndBalance or Mutation is not correct:",ex);

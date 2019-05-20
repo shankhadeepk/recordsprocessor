@@ -2,8 +2,8 @@ package com.rabobank.statementprocessor.model;
 /*
 *
 * The JSON Request for the POST REST API
-*
-*
+* @Author Shankhadeep Karmakar
+* @Version 1.0
 * */
 public class ReportRequest {
 

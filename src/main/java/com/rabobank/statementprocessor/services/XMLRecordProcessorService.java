@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.List;
 
 /*
- * This class implements XML Record Processor Service
+ * Service takes care of XML Record Processor
  * @Author Shankhadeep Karmakar
  * @Version 1.0
  *
@@ -35,17 +35,28 @@ public class XMLRecordProcessorService implements RecordProcessorService {
 
     private final Logger LOG = LoggerFactory.getLogger(XMLRecordProcessorService.class);
 
+    private  final JAXBContext jaxbContext = JAXBContext.newInstance(Record.class);
+    private  final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+
     @Resource
     public List<Record> listOfRecords;
 
     @Autowired
     public RecordValidation recordValidation;
 
+    public XMLRecordProcessorService() throws JAXBException {
+    }
+
+    /**
+     * read reads each record from the XML file and validates it with business scenarios
+     *
+     *
+     * @param inputFile accepts the input file from request
+     * @return the response entity
+     * @throws IOException              the io exception
+     */
     @Override
     public void read(String inputFile) throws IOException, JAXBException, XMLStreamException, ClassNotFoundException {
-
-        JAXBContext jaxbContext = JAXBContext.newInstance(Record.class);
-        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
         XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
         xmlInputFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
         XMLStreamReader xmlStreamReader = xmlInputFactory.createXMLStreamReader(new FileInputStream(inputFile));
@@ -65,8 +76,8 @@ public class XMLRecordProcessorService implements RecordProcessorService {
                     xmlStreamReader.next();
                 }
                 if (xmlStreamReader != null
-                        && !(xmlStreamReader.getEventType() == XMLStreamReader.END_DOCUMENT)
-                        && !(xmlStreamReader.getEventType() == XMLStreamReader.END_ELEMENT)) {
+                        && !(XMLStreamReader.END_DOCUMENT == xmlStreamReader.getEventType())
+                        && !(XMLStreamReader.END_ELEMENT == xmlStreamReader.getEventType())) {
                     jaxbElement = unmarshaller.unmarshal(xmlStreamReader, Class.forName(ApplicationConstants.CLASS.getValue()));
                 }
                 if (jaxbElement == null) break;
